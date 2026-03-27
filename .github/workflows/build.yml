@@ -6,25 +6,27 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Java
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip wget unzip openjdk-17-jdk
+          pip3 install buildozer cython
 
-      - name: Install Ren'Py
+      - name: Setup Ren'Py
         run: |
           wget -q https://www.renpy.org/dl/8.3.7/renpy-8.3.7-sdk.tar.bz2
           tar -xjf renpy-8.3.7-sdk.tar.bz2
+          cd renpy-8.3.7-sdk
+          python3 renpy.py setup android
 
-      - name: Build Android APK
+      - name: Build APK
         run: |
           cd renpy-8.3.7-sdk
-          ./renpy.sh launcher android_build ../ --destination ../output
+          python3 renpy.py android_build ../ --destination ../output
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
