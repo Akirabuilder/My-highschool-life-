@@ -1,0 +1,24 @@
+name: Build Ren'Py APK
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Ren'Py
+        uses: louist103/renpy-build-action@main
+        with:
+          sdk-version: '8.3.7'
+          project-dir: '.'
+          targets: 'android'
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: game-apk
+          path: '**/*.apk'
