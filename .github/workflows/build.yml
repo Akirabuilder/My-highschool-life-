@@ -10,12 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build Ren'Py
-        uses: louist103/renpy-build-action@main
-        with:
-          sdk-version: '8.3.7'
-          project-dir: '.'
-          targets: 'android'
+      - name: Install Ren'Py
+        run: |
+          wget https://www.renpy.org/dl/8.3.7/renpy-8.3.7-sdk.tar.bz2
+          tar -xjf renpy-8.3.7-sdk.tar.bz2
+
+      - name: Build Android APK
+        run: |
+          cd renpy-8.3.7-sdk
+          ./renpy.sh launcher android_build ../. assembleRelease
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
