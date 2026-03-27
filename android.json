@@ -1,0 +1,20 @@
+{
+    "package": "com.akirabuilder.myhighschoollife",
+    "name": "My Highschool Life",
+    "icon_name": "My Highschool Life",
+    "version": "1.0",
+    "numeric_version": "1",
+    "orientation": "landscape",
+    "expansion": false,
+    "permissions": [],
+    "include_pil": false,
+    "include_sqlite": false,
+    "layout": null,
+    "release_keystore": "",
+    "release_keystore_alias": "",
+    "google_play_key": null,
+    "google_play_salt": null,
+    "store": "none",
+    "update_icons": true,
+    "heap_size": "3"
+}
